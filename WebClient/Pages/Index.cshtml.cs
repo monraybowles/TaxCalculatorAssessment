@@ -9,6 +9,7 @@ namespace WebClient.Pages
 {
     public class IndexModel : PageModel
     {
+
         private readonly ApplicationDbContext _context;
         private readonly ITaxResolverService _taxResolver;
         public IndexModel(ApplicationDbContext context, ITaxResolverService taxResolver)

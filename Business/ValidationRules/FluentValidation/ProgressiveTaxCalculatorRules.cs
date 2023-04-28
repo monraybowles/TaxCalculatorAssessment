@@ -5,10 +5,7 @@ using System.Linq;
 
 namespace Business.ValidationRules.FluentValidation
 {
-
-   
-   
-
+    
     public class ProgressiveTaxCalculatorRules : ITaxCalculatorService
 {
         readonly List<(double minimum, double maximum, double rate)> _taxBrackets = new List<(double minimum, double maximum, double rate)>

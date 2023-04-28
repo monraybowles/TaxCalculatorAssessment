@@ -17,5 +17,7 @@ namespace Business.Concrete
         {
             return annualIncome;
         }
+
+       
     }
 }
