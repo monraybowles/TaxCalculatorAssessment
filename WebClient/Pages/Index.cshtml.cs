@@ -33,11 +33,13 @@ namespace WebClient.Pages
         }
         public RedirectToPageResult OnPost()
         {
+
             if (!ModelState.IsValid)
             {
                 UserCalculations = UserCalculations = _context.UserTaxCalculation.ToList();
                 return PageResult();
-            }            
+            }
+            
             var calculation = _taxResolver.GetTaxCalculator(UserCalculation.PostalCode).Calculate(UserCalculation.AnnualIncome);
             UserCalculation.Id = Guid.NewGuid();
             UserCalculation.CalculationDate = DateTime.Now;
