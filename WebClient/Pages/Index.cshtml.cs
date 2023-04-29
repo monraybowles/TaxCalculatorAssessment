@@ -1,6 +1,7 @@
 using Business.Abstract;
 using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework.Context;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,13 +25,15 @@ namespace WebClient.Pages
                                  }).ToList();
          }
         public List<SelectListItem> PostalCode { get; set; }
-        public IList<UserTaxCalculation> UserCalculations { get; set; }
+        public IList<UserTaxCalculationDto> UserCalculations { get; set; }
+
         [BindProperty]
-        public UserTaxCalculation UserCalculation { get; set; }
+        public UserTaxCalculationDto UserCalculation { get; set; }
         public void OnGet()
         {
-            UserCalculations = _context.UserTaxCalculation.ToList();
+            UserCalculations = UserCalculations = _context.UserTaxCalculation.ToList();
         }
+
         public RedirectToPageResult OnPost()
         {
 
@@ -39,7 +42,7 @@ namespace WebClient.Pages
                 UserCalculations = UserCalculations = _context.UserTaxCalculation.ToList();
                 return PageResult();
             }
-            
+
             var calculation = _taxResolver.GetTaxCalculator(UserCalculation.PostalCode).Calculate(UserCalculation.AnnualIncome);
             UserCalculation.Id = Guid.NewGuid();
             UserCalculation.CalculationDate = DateTime.Now;
@@ -54,5 +57,3 @@ namespace WebClient.Pages
         }
     }
 }
-
-

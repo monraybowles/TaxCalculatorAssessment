@@ -28,6 +28,6 @@ namespace Entities.DTOs
         [Range(0, double.MaxValue)]
         [Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Annual Income")]
-        public decimal AnnualIncome { get; set; }
+        public double AnnualIncome { get; set; }
     }
 }
