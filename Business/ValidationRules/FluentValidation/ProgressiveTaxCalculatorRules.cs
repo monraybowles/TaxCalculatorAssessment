@@ -37,9 +37,9 @@ namespace Business.ValidationRules.FluentValidation
         }
 
         private IEnumerable<double> GetBracketTax(double annualIncome) => from bracket in _taxBrackets
-                                                                      where annualIncome > bracket.minimum
-                                                                      let incomeInTheBracket = Math.Min(bracket.maximum - bracket.minimum, annualIncome - bracket.minimum)
-                                                                      let bracketTax = incomeInTheBracket * bracket.rate
-                                                                      select bracketTax;
+         where annualIncome > bracket.minimum
+        let incomeInTheBracket = Math.Min(bracket.maximum - bracket.minimum, annualIncome - bracket.minimum)
+        let bracketTax = incomeInTheBracket * bracket.rate
+      select bracketTax;
     }
 }

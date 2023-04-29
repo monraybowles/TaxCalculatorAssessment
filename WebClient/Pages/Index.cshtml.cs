@@ -5,6 +5,12 @@ using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebClient.Pages
 {
@@ -42,11 +48,24 @@ namespace WebClient.Pages
                 UserCalculations = UserCalculations = _context.UserTaxCalculation.ToList();
                 return PageResult();
             }
+           
+            if (UserCalculation.PostalCode == "" || UserCalculation.EmailAddress == "")
+            {
+               
+                return PageResult();
+            }
 
-            var calculation = _taxResolver.GetTaxCalculator(UserCalculation.PostalCode).Calculate(UserCalculation.AnnualIncome);
+
+            var x = UserCalculation.AnnualIncome;
+             var y = UserCalculation.PostalCode.TrimEnd();
+            //var calValuse = y
+            //  var calculation = 4444;
+           // double calculation;
+            var calValue = _taxResolver.GetTaxCalculator(y).Calculate(x);
+           // calculation.Calculate(calValue);
             UserCalculation.Id = Guid.NewGuid();
             UserCalculation.CalculationDate = DateTime.Now;
-            UserCalculation.TaxCalculation = calculation;
+            UserCalculation.TaxCalculation = Convert.ToDouble(calValue);
             _context.UserTaxCalculation.Add(UserCalculation);
             _context.SaveChanges();
             return RedirectToPage("./Index");

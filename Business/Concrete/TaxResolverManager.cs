@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using System;
-using System.Collections.Generic;
 
 
 namespace Business.Concrete
